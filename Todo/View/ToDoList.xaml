@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Todo.View.ToDoList">
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout BackgroundColor="{DynamicResource ThemeColor}" HeightRequest="{StaticResource DefaultHeaderHeight}">
+
+                <ff:CachedImage x:Name="btnAdd"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,0.5,30,30" Source="resource://Todo.Resource.Images.plus.png" />
+                <Label Text="Todo App" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,100,45" />
+            </AbsoluteLayout>
+
+            <ListView x:Name="lvTodo" IsVisible="{DynamicResource isVisibleList}" BackgroundColor="{DynamicResource ListViewBgColor}" HasUnevenRows="True" Margin="2" ItemsSource="{Binding ToDoList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Frame BackgroundColor="{Binding NeedToDo}" Padding="0" Margin="2" CornerRadius="4" Grid.ColumnSpan="2" />
+
+                                <StackLayout>
+                                    <Label Text="{Binding Time, StringFormat='{0:hh\\:mm}'}"></Label>
+                                    <Label Text="{Binding Note}"></Label>
+                                </StackLayout>
+
+                                <Button Clicked="DeleteButtonClicked" Text="Delete" TextColor="Red" Grid.Column="1" VerticalOptions="Center" WidthRequest="80">
+                                    
+                                </Button>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label x:Name="lbNoItem" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,100,45" IsVisible="{DynamicResource isVisibleNoItem}" Text="No todo item !!!" TextColor="Black"></Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
